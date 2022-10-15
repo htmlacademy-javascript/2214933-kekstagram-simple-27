@@ -15,5 +15,43 @@ function getRandomInt(min, max) {
 // проверка длинны коментария
 const compareLengths = (string, maxLength) => [...string].length <= maxLength;
 
-getRandomInt(1, 2);
-compareLengths('asdasdads', 12);
+compareLengths();
+
+function getRandomArrayElement(array) {
+  const rand = Math.floor(Math.random() * array.length);
+  return array[rand];
+}
+
+const LIKES_COUNT = {
+  MIN: 15,
+  MAX: 200
+};
+
+const COMMENTS_COUNT = {
+  MIN: 0,
+  MAX: 200
+};
+
+const PICTURES_COUNT = 25;
+
+const ARRAY_PICTURE = [];
+
+const descriptionArray = ['1descr', '2descr', '3descr'];
+
+const createPicture = (index) => ({
+  id: index,
+  url: `photos/${index}.jpg`,
+  description: getRandomArrayElement(descriptionArray),
+  likes: getRandomInt(LIKES_COUNT.MIN, LIKES_COUNT.MAX),
+  comments: getRandomInt(COMMENTS_COUNT.MIN, COMMENTS_COUNT.MAX)
+});
+
+function createPictures() {
+  for (let index = 1; index <= PICTURES_COUNT; index++) {
+    // createPicture (index);
+    ARRAY_PICTURE.push(createPicture(index));
+    // console.log(createPicture(index));
+  }
+}
+createPictures();
+// console.log(ARRAY_PICTURE);
