@@ -1,0 +1,15 @@
+const LIKES_COUNT = {
+  MIN: 15,
+  MAX: 200
+};
+
+const COMMENTS_COUNT = {
+  MIN: 0,
+  MAX: 200
+};
+
+const PICTURES_COUNT = 25;
+
+const DESCRIPTIONARRAY = ['1descr', '2descr', '3descr'];
+
+export {LIKES_COUNT, COMMENTS_COUNT, PICTURES_COUNT, DESCRIPTIONARRAY};
