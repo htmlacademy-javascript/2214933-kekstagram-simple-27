@@ -1,3 +1,5 @@
+import {getRandomArrayElement, getRandomInt} from './util.js';
+
 const LIKES_COUNT = {
   MIN: 15,
   MAX: 200
@@ -12,4 +14,18 @@ const PICTURES_COUNT = 25;
 
 const DESCRIPTIONARRAY = ['1descr', '2descr', '3descr'];
 
-export {LIKES_COUNT, COMMENTS_COUNT, PICTURES_COUNT, DESCRIPTIONARRAY};
+
+const createPicture = (index) => ({
+  id: index + 1,
+  url: `photos/${index + 1}.jpg`,
+  description: getRandomArrayElement(DESCRIPTIONARRAY),
+  likes: getRandomInt(LIKES_COUNT.MIN, LIKES_COUNT.MAX),
+  comments: getRandomInt(COMMENTS_COUNT.MIN, COMMENTS_COUNT.MAX)
+});
+
+
+const generatedPictures = Array.from({
+  length: PICTURES_COUNT
+}, (_value, index) => createPicture(index));
+
+export {generatedPictures};

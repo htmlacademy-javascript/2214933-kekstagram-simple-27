@@ -1,3 +1,3 @@
-import{generatedPictures} from './generate-pictures.js';
+import {renderingMiniature} from './rendering-pictures.js';
 
-console.log(generatedPictures);
+renderingMiniature();
