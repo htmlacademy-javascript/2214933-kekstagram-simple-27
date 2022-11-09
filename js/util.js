@@ -20,4 +20,8 @@ const compareLengths = (string, maxLength) => string.length <= maxLength;
 //случайный элемент масива
 const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length - 1)];
 
-export {getRandomArrayElement, getRandomInt, compareLengths};
+// функции проверки нажатия кнопок
+const isEscapeKey = (evt) => evt.key === 'Escape';
+const isEnterKey = (evt) => evt.key === 'Enter';
+
+export {getRandomArrayElement, getRandomInt, compareLengths, isEscapeKey, isEnterKey};

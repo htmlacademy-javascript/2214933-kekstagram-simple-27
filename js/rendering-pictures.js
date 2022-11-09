@@ -2,7 +2,9 @@ import {generatedPictures} from './data.js';
 
 const miniatures = document.querySelector('.pictures');
 const similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+
 // console.log(similarPictureTemplate)
+
 const renderingMiniature = () => {
   const similarListFragment = document.createDocumentFragment();
 

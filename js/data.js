@@ -1,5 +1,9 @@
 import {getRandomArrayElement, getRandomInt} from './util.js';
 
+const MINDESCRIPTIONLENGT = 20;
+const MAXDESCRIPTIONLENGT = 140;
+
+
 const LIKES_COUNT = {
   MIN: 15,
   MAX: 200
@@ -29,3 +33,4 @@ const generatedPictures = Array.from({
 }, (_value, index) => createPicture(index));
 
 export {generatedPictures};
+export {MINDESCRIPTIONLENGT,MAXDESCRIPTIONLENGT};
