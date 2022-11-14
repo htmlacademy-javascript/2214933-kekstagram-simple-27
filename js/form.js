@@ -1,4 +1,6 @@
 import {isEscapeKey, isEnterKey} from './util.js';
+import {resetScale} from './scale.js';
+import {resetEffects} from './filters.js';
 
 const uploadUserPhoto = document.querySelector('#upload-file');
 const modalWindow = document.querySelector('.img-upload__overlay');
@@ -34,6 +36,8 @@ uploadUserPhoto.addEventListener('change', (evt) => {
 //функция закрытия модального окна
 
 function closeUserModal() {
+  resetScale();
+  resetEffects();
   modalWindow.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscapeDown);
