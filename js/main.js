@@ -1,9 +1,11 @@
-import './form.js';
+import {setUserFormSubmit,closeUserModal} from './form.js';
 import './validate.js';
-
-
-import {renderingMiniature} from './rendering-pictures.js';
+import {createPictureList} from './rendering-pictures.js';
+import {getImageData} from './api.js';
 import './filters.js';
 
+getImageData((pictures) => {
+  createPictureList(pictures);
+});
 
-renderingMiniature();
+setUserFormSubmit(closeUserModal);
