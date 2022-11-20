@@ -1,20 +1,28 @@
-import {generatedPictures} from './data.js';
+const pictureContainer = document.querySelector('.pictures');
+const pictureTemplate = document.querySelector('#picture')
+  .content
+  .querySelector('.picture');
 
-const miniatures = document.querySelector('.pictures');
-const similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const pictureListFragment = document.createDocumentFragment();
 
-// console.log(similarPictureTemplate)
+const createPictureList = (pictures) => {
 
-const renderingMiniature = () => {
-  const similarListFragment = document.createDocumentFragment();
-
-  generatedPictures.forEach(({ url, likes, comments }) => {
-    const miniatureElement = similarPictureTemplate.cloneNode(true);
-    miniatureElement.querySelector('.picture__img').src = url;
-    miniatureElement.querySelector('.picture__likes').textContent = likes;
-    miniatureElement.querySelector('.picture__comments').textContent = comments;
-    similarListFragment.appendChild(miniatureElement);
+  pictures.forEach(({url, likes, comments, description}) => {
+    const pictureElement = pictureTemplate.cloneNode(true);
+    const pictureImg = pictureElement.querySelector('.picture__img');
+    pictureImg.src = url;
+    pictureImg.alt = description;
+    const pictureInfoContainer = pictureElement.querySelector('.picture__info');
+    const pictureComents = pictureInfoContainer.querySelector('.picture__comments');
+    pictureComents.textContent = comments;
+    const pictureLikes = pictureInfoContainer.querySelector('.picture__likes');
+    pictureLikes.textContent = likes;
+    pictureInfoContainer.appendChild(pictureComents);
+    pictureInfoContainer.appendChild(pictureLikes);
+    pictureListFragment.appendChild(pictureElement);
   });
-  miniatures.appendChild(similarListFragment);
+  pictureContainer.appendChild(pictureListFragment);
 };
-export {renderingMiniature};
+
+
+export {createPictureList};
