@@ -21,8 +21,6 @@ const onPopupEscapeDown = (evt) => {
 };
 
 
-//функция открытия модального окна
-
 function openUserModal() {
   modalWindow.classList.remove('hidden');
   modal.classList.add('modal-open');
@@ -38,8 +36,6 @@ uploadUserPhoto.addEventListener('change', (evt) => {
     openUserModal();
   }
 });
-
-//функция закрытия модального окна
 
 function closeUserModal() {
   resetScale();
@@ -102,4 +98,4 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-export { setUserFormSubmit,closeUserModal,openUserModal};
+export { setUserFormSubmit,closeUserModal};
