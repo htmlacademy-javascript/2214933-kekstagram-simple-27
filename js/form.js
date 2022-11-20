@@ -2,8 +2,8 @@ import { isEscapeKey, isEnterKey } from './util.js';
 import { resetScale } from './scale.js';
 import { resetEffects } from './filters.js';
 import { sendImageData } from './api.js';
-import { createSuccesMessageUpload, createErrorMessageUpload} from './alerts-render.js';
-import {pristine} from './validate.js';
+import { createSuccesMessageUpload, createErrorMessageUpload } from './alerts-render.js';
+import { pristine } from './validate.js';
 
 const uploadUserPhoto = document.querySelector('#upload-file');
 const modalWindow = document.querySelector('.img-upload__overlay');
