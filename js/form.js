@@ -12,7 +12,7 @@ const userCloseModalWindow = document.querySelector('#upload-cancel');
 const pictureUploadInput = modal.querySelector('.img-upload__input');
 const submitButton = modal.querySelector('.img-upload__submit');
 const form = modal.querySelector('.img-upload__form');
-const onPopupEscapeDown = (evt) => {
+const onPopupEscKeydown = (evt) => {
   if(isEscapeKey(evt)) {
     evt.preventDefault();
     closeUserModal();
@@ -23,7 +23,7 @@ const onPopupEscapeDown = (evt) => {
 function openUserModal() {
   modalWindow.classList.remove('hidden');
   modal.classList.add('modal-open');
-  document.addEventListener('keydown', onPopupEscapeDown);
+  document.addEventListener('keydown', onPopupEscKeydown);
 }
 
 uploadUserPhoto.addEventListener('change', () => {
@@ -41,7 +41,7 @@ function closeUserModal() {
   resetEffects();
   modalWindow.classList.add('hidden');
   modal.classList.remove('modal-open');
-  document.removeEventListener('keydown', onPopupEscapeDown);
+  document.removeEventListener('keydown', onPopupEscKeydown);
   form.reset();
 }
 
@@ -78,7 +78,7 @@ const unblockSubmitButton = () => {
 const setUserFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    document.removeEventListener('keydown', onPopupEscapeDown);
+    document.removeEventListener('keydown', onPopupEscKeydown);
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
