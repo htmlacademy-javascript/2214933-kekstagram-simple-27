@@ -17,41 +17,21 @@ const getImageData = (success, error) => {
     });
 };
 
-// const sendImageData = (success, error, body) => {
-//   fetch (
-//     DATA_SOURCE_OUTPUT,
-//     {
-//       method: 'POST',
-//       body,
-//     })
-//     .then((response) => {
-//       if (response.ok) {
-//         return success();
-//       }
-//       throw new Error();
-//     })
-//     .catch(() => {
-//       error();
-//     });
-// };
-
-const sendImageData = (onSuccess, onFail, body) => {
-  fetch(
+const sendImageData = (success, error, body) => {
+  fetch (
     DATA_SOURCE_OUTPUT,
     {
       method: 'POST',
       body,
-    },
-  )
+    })
     .then((response) => {
       if (response.ok) {
-        onSuccess();
-      } else {
-        onFail();
+        return success();
       }
+      throw new Error();
     })
     .catch(() => {
-      onFail();
+      error();
     });
 };
 
