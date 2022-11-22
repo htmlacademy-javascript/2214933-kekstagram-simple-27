@@ -1,10 +1,7 @@
-import { setUserFormSubmit,closeUserModal } from './form.js';
-import './validate.js';
 import { createPictureList } from './rendering-pictures.js';
 import { getImageData } from './api.js';
-
-getImageData((pictures) => {
-  createPictureList(pictures);
-});
-
+import {showLoadError} from './util.js';
+import './form.js';
+import { setUserFormSubmit,closeUserModal } from './form.js';
+getImageData(createPictureList, showLoadError);
 setUserFormSubmit(closeUserModal);

@@ -5,13 +5,14 @@ import { sendImageData } from './api.js';
 import { createSuccesMessageUpload, createErrorMessageUpload } from './alerts-render.js';
 import { pristine } from './validate.js';
 
-const uploadUserPhoto = document.querySelector('#upload-file');
-const modalWindow = document.querySelector('.img-upload__overlay');
-const modal = document.querySelector('body');
-const userCloseModalWindow = document.querySelector('#upload-cancel');
-const pictureUploadInput = modal.querySelector('.img-upload__input');
-const submitButton = modal.querySelector('.img-upload__submit');
-const form = modal.querySelector('.img-upload__form');
+const userPhoto = document.querySelector('#upload-file');
+const windowModal = document.querySelector('.img-upload__overlay');
+const body = document.querySelector('body');
+const userCloseWindowModal = document.querySelector('#upload-cancel');
+const imageUploadInput = body.querySelector('.img-upload__input');
+const buttonSubmit = body.querySelector('.img-upload__submit');
+const form = body.querySelector('.img-upload__form');
+
 const onPopupEscKeydown = (evt) => {
   if(isEscapeKey(evt)) {
     evt.preventDefault();
@@ -19,18 +20,17 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-
 function openUserModal() {
-  modalWindow.classList.remove('hidden');
-  modal.classList.add('modal-open');
+  windowModal.classList.remove('hidden');
+  body.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
 }
 
-uploadUserPhoto.addEventListener('change', () => {
+userPhoto.addEventListener('change', () => {
   openUserModal();
 });
 
-uploadUserPhoto.addEventListener('change', (evt) => {
+userPhoto.addEventListener('change', (evt) => {
   if (isEnterKey(evt)) {
     openUserModal();
   }
@@ -39,41 +39,35 @@ uploadUserPhoto.addEventListener('change', (evt) => {
 function closeUserModal() {
   resetScale();
   resetEffects();
-  modalWindow.classList.add('hidden');
-  modal.classList.remove('modal-open');
+  windowModal.classList.add('hidden');
+  body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
   form.reset();
 }
 
-
-userCloseModalWindow.addEventListener('click', () => {
+userCloseWindowModal.addEventListener('click', () => {
   closeUserModal();
 });
 
-
-userCloseModalWindow.addEventListener('keydown', (evt) => {
+userCloseWindowModal.addEventListener('keydown', (evt) => {
   if (isEscapeKey(evt)) {
     closeUserModal();
   }
 });
 
-
-pictureUploadInput.addEventListener('change', () => {
+imageUploadInput.addEventListener('change', () => {
   openUserModal();
 });
 
-
-const blockSubmitButton = () => {
-  submitButton.disabled = true;
-  submitButton.textContent = 'Сохраняю...';
+const blockbuttonSubmit = () => {
+  buttonSubmit.disabled = true;
+  buttonSubmit.textContent = 'Сохраняю...';
 };
 
-
-const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = 'Сохранить';
+const unblockbuttonSubmit = () => {
+  buttonSubmit.disabled = false;
+  buttonSubmit.textContent = 'Сохранить';
 };
-
 
 const setUserFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
@@ -81,16 +75,16 @@ const setUserFormSubmit = (onSuccess) => {
     document.removeEventListener('keydown', onPopupEscKeydown);
     const isValid = pristine.validate();
     if (isValid) {
-      blockSubmitButton();
+      blockbuttonSubmit();
       sendImageData(
         () => {
           onSuccess();
           createSuccesMessageUpload();
-          unblockSubmitButton();
+          unblockbuttonSubmit();
         },
         () => {
           createErrorMessageUpload();
-          unblockSubmitButton();
+          unblockbuttonSubmit();
         },
         new FormData(evt.target),
       );

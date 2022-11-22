@@ -1,36 +1,36 @@
-const userModalWindow = document.querySelector('.img-upload__overlay');
-const scaleControlSmaller = document.querySelector('.scale__control--smaller');
-const scaleControlBigger = document.querySelector('.scale__control--bigger');
-const scaleControl = userModalWindow.querySelector('.scale__control--value');
-const imgUploadPreviewImg = document.querySelector('.img-upload__preview img');
+const userWindow = document.querySelector('.img-upload__overlay');
+const sizeControlSmaller = document.querySelector('.scale__control--smaller');
+const sizeControlBigger = document.querySelector('.scale__control--bigger');
+const sizeControl = userWindow.querySelector('.scale__control--value');
+const imageUploadPreviewImg = document.querySelector('.img-upload__preview img');
 
-const DEFAULT_SCALE = 100;
-const MIN_SCALE = 25;
-const MAX_SCALE = 100;
-const SCALE_STEP = 25;
+const SIZE_DEFAULT = 100;
+const SIZE_MIN = 25;
+const SIZE_MAX = 100;
+const SIZE_STEP = 25;
 
-let scaleControlValue = DEFAULT_SCALE;
+let sizeControlValue = SIZE_DEFAULT;
 
-const scaleImage = (value = DEFAULT_SCALE) => {
-  scaleControlValue = 100;
-  imgUploadPreviewImg.style.transform = `scale(${value / 100})`;
-  scaleControl.value = `${scaleControlValue}%`;
+const scaleImage = (value = SIZE_DEFAULT) => {
+  sizeControlValue = 100;
+  imageUploadPreviewImg.style.transform = `scale(${value / 100})`;
+  sizeControl.value = `${sizeControlValue}%`;
 };
 
 
 const onSmallerButtonClick = () => {
-  if (scaleControlValue > MIN_SCALE ) {
-    scaleControlValue -= SCALE_STEP;
-    scaleControl.value = `${scaleControlValue}%`;
-    imgUploadPreviewImg.style.transform = `scale(${scaleControlValue / 100})`;
+  if (sizeControlValue > SIZE_MIN ) {
+    sizeControlValue -= SIZE_STEP;
+    sizeControl.value = `${sizeControlValue}%`;
+    imageUploadPreviewImg.style.transform = `scale(${sizeControlValue / 100})`;
   }
 };
 
 const onBiggerButtonClick = () => {
-  if (scaleControlValue < MAX_SCALE) {
-    scaleControlValue += SCALE_STEP;
-    scaleControl.value = `${scaleControlValue}%`;
-    imgUploadPreviewImg.style.transform = `scale(${scaleControlValue / 100})`;
+  if (sizeControlValue < SIZE_MAX) {
+    sizeControlValue += SIZE_STEP;
+    sizeControl.value = `${sizeControlValue}%`;
+    imageUploadPreviewImg.style.transform = `scale(${sizeControlValue / 100})`;
   }
 };
 
@@ -38,7 +38,7 @@ const resetScale = () => {
   scaleImage();
 };
 
-scaleControlSmaller.addEventListener('click', onSmallerButtonClick);
-scaleControlBigger.addEventListener('click', onBiggerButtonClick);
+sizeControlSmaller.addEventListener('click', onSmallerButtonClick);
+sizeControlBigger.addEventListener('click', onBiggerButtonClick);
 
 export { resetScale };

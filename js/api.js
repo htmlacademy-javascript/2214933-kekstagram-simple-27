@@ -1,37 +1,57 @@
-const INPUT_DATA_SOURCE = 'https://27.javascript.pages.academy/kekstagram-simple/data';
-const OUTPUT_DATA_SOURCE = 'https://27.javascript.pages.academy/kekstagram-simple';
+const DATA_SOURCE_INPUT = 'https://27.javascript.pages.academy/kekstagram-simple/data';
+const DATA_SOURCE_OUTPUT = 'https://27.javascript.pages.academy/kekstagram-simple';
 
-const getImageData = (onSuccess, onError) => {
-  fetch (INPUT_DATA_SOURCE)
+const getImageData = (success, error) => {
+  fetch (DATA_SOURCE_INPUT)
     .then((response) => {
       if (response.ok) {
         return response.json();
       }
-      throw new Error();
+      throw new Error(`${response.status} — ${response.statusText}`);
     })
     .then((data) => {
-      onSuccess(data);
+      success(data);
     })
     .catch(() => {
-      onError();
+      error();
     });
 };
 
-const sendImageData = (onSuccess, onError, body) => {
-  fetch (
-    OUTPUT_DATA_SOURCE,
+// const sendImageData = (success, error, body) => {
+//   fetch (
+//     DATA_SOURCE_OUTPUT,
+//     {
+//       method: 'POST',
+//       body,
+//     })
+//     .then((response) => {
+//       if (response.ok) {
+//         return success();
+//       }
+//       throw new Error();
+//     })
+//     .catch(() => {
+//       error();
+//     });
+// };
+
+const sendImageData = (onSuccess, onFail, body) => {
+  fetch(
+    DATA_SOURCE_OUTPUT,
     {
       method: 'POST',
       body,
-    })
+    },
+  )
     .then((response) => {
       if (response.ok) {
-        return onSuccess();
+        onSuccess();
+      } else {
+        onFail();
       }
-      throw new Error();
     })
     .catch(() => {
-      onError();
+      onFail();
     });
 };
 
