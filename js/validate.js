@@ -1,4 +1,4 @@
-import {MINDESCRIPTIONLENGT, MAXDESCRIPTIONLENGT} from './data.js';
+import {DESCRIPTION_MIN_LENGT, DESCRIPTION_MAX_LENGT} from './data.js';
 
 const form = document.querySelector('.img-upload__form');
 
@@ -11,7 +11,7 @@ const pristine = new Pristine(form, {
   errorTextClass: 'text__description--error'
 });
 
-const validateDescription = (value) => value.length >= MINDESCRIPTIONLENGT && value.length <= MAXDESCRIPTIONLENGT;
+const validateDescription = (value) => value.length >= DESCRIPTION_MIN_LENGT && value.length <= DESCRIPTION_MAX_LENGT;
 
 pristine.addValidator(form.querySelector('.text__description'), validateDescription, 'От 20 до 140 символов.');
 

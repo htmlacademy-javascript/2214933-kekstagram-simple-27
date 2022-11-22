@@ -1,21 +1,21 @@
-import{EFFECTS} from './data.js';
+import{imageEffects} from './data.js';
 
-const imgUploadPreviewImg = document.querySelector('.img-upload__preview img');
+const imageUploadPreviewImg = document.querySelector('.img-upload__preview img');
 const form = document.querySelector('.img-upload__form');
-const sliderElement = document.querySelector('.effect-level__slider');
+const elementSlider = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
-const sliderfieldset = document.querySelector('.img-upload__effect-level');
+const sliderFieldset = document.querySelector('.img-upload__effect-level');
 
-const DEFAULT_EFFECT = EFFECTS[5];
+const EFFECT_DEFAULT = imageEffects[5];
 
-let chosenEffect = DEFAULT_EFFECT;
+let chosenEffect = EFFECT_DEFAULT;
 
-const isDefault = () => chosenEffect === DEFAULT_EFFECT;
+const isDefault = () => chosenEffect === EFFECT_DEFAULT;
 
 const updateSlider = () => {
-  sliderElement.classList.remove('hidden');
-  sliderfieldset.classList.remove('hidden');
-  sliderElement.noUiSlider.updateOptions({
+  elementSlider.classList.remove('hidden');
+  sliderFieldset.classList.remove('hidden');
+  elementSlider.noUiSlider.updateOptions({
     range: {
       min: chosenEffect.min,
       max: chosenEffect.max,
@@ -25,8 +25,8 @@ const updateSlider = () => {
   });
 
   if(isDefault()) {
-    sliderElement.classList.add('hidden');
-    sliderfieldset.classList.add('hidden');
+    elementSlider.classList.add('hidden');
+    sliderFieldset.classList.add('hidden');
   }
 };
 
@@ -34,40 +34,40 @@ const onFormChange = (evt) => {
   if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
-  chosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
+  chosenEffect = imageEffects.find((effect) => effect.name === evt.target.value);
   updateSlider();
 };
 
 const onSliderUpdate = () => {
-  imgUploadPreviewImg.style.filter = 'none';
-  imgUploadPreviewImg.className = '';
+  imageUploadPreviewImg.style.filter = 'none';
+  imageUploadPreviewImg.className = '';
   valueElement.value = '';
   if (isDefault()) {
     return;
   }
-  const sliderValue = sliderElement.noUiSlider.get();
-  imgUploadPreviewImg.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
-  imgUploadPreviewImg.classList.add(`effects__previw--${chosenEffect.name}`);
-  valueElement.value = sliderElement;
+  const valueSlider = elementSlider.noUiSlider.get();
+  imageUploadPreviewImg.style.filter = `${chosenEffect.style}(${valueSlider}${chosenEffect.unit})`;
+  imageUploadPreviewImg.classList.add(`effects__previw--${chosenEffect.name}`);
+  valueElement.value = elementSlider;
 };
 
 const resetEffects = () => {
-  chosenEffect = DEFAULT_EFFECT;
+  chosenEffect = EFFECT_DEFAULT;
   updateSlider();
 };
 
-noUiSlider.create(sliderElement, {
+noUiSlider.create(elementSlider, {
   range: {
-    min: DEFAULT_EFFECT.min,
-    max: DEFAULT_EFFECT.max,
+    min: EFFECT_DEFAULT.min,
+    max: EFFECT_DEFAULT.max,
   },
-  start: DEFAULT_EFFECT.max,
-  step: DEFAULT_EFFECT.step,
+  start: EFFECT_DEFAULT.max,
+  step: EFFECT_DEFAULT.step,
   connect: 'lower',
 });
 
 updateSlider();
 form.addEventListener('change', onFormChange);
-sliderElement.noUiSlider.on('update', onSliderUpdate);
+elementSlider.noUiSlider.on('update', onSliderUpdate);
 
 export { resetEffects };

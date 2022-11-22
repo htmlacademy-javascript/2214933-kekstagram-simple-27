@@ -1,17 +1,17 @@
 import {isEscapeKey,isEnterKey} from './util.js';
 
-const modal = document.querySelector('body');
+const body = document.querySelector('body');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
-const alertSuccessFragment = document.createDocumentFragment();
+const fragmentSuccessAlert = document.createDocumentFragment();
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
-const alertErrorFragment = document.createDocumentFragment();
+const fragmentErrorAlert = document.createDocumentFragment();
 
 
 const onSuccessDocumentClick = (evt) => {
   const element = document.querySelector('.success__inner');
-  const withinBoundaries = evt.composedPath().includes(element);
+  const boundary = evt.composedPath().includes(element);
 
-  if (!withinBoundaries) {
+  if (!boundary) {
     hideAlert();
   }
 };
@@ -24,9 +24,9 @@ const createSuccesMessageUpload = () => {
   document.addEventListener('click', onSuccessDocumentClick);
   messageElement.querySelector('.success__button').addEventListener('click', onHideAlertButtonClick);
   messageElement.appendChild(messageContainer);
-  alertSuccessFragment.appendChild(messageElement);
-  modal.append(alertSuccessFragment);
-  modal.style.overflow = 'hidden';
+  fragmentSuccessAlert.appendChild(messageElement);
+  body.append(fragmentSuccessAlert);
+  body.style.overflow = 'hidden';
 };
 
 const createErrorMessageUpload = () => {
@@ -37,9 +37,9 @@ const createErrorMessageUpload = () => {
   document.addEventListener('click', onSuccessDocumentClick);
   messageElement.querySelector('.error__button').addEventListener('click', onHideAlertButtonClick);
   messageElement.appendChild(messageContainer);
-  alertErrorFragment.appendChild(messageElement);
-  modal.append(alertErrorFragment);
-  modal.style.overflow = 'hidden';
+  fragmentErrorAlert.appendChild(messageElement);
+  body.append(fragmentErrorAlert);
+  body.style.overflow = 'hidden';
 };
 
 function onHideAlertButtonClick() {
@@ -62,9 +62,9 @@ function onPopupEscKeydown(evt) {
 }
 
 function hideAlert() {
-  const alertMessage = document.querySelector('.success') || document.querySelector('.error');
-  modal.removeChild(alertMessage);
-  modal.style.overflow = 'auto';
+  const messageAlert = document.querySelector('.success') || document.querySelector('.error');
+  body.removeChild(messageAlert);
+  body.style.overflow = 'auto';
   document.removeEventListener('keydown', onPopupEnterKeydown);
   document.removeEventListener('keydown', onPopupEscKeydown);
   document.removeEventListener('click', onSuccessDocumentClick);

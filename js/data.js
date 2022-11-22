@@ -1,6 +1,7 @@
-const MINDESCRIPTIONLENGT = 20;
-const MAXDESCRIPTIONLENGT = 140;
-const EFFECTS = [
+const DESCRIPTION_MIN_LENGT = 20;
+const DESCRIPTION_MAX_LENGT = 140;
+
+const imageEffects = [
   {
     name: 'chrome',
     style: 'grayscale',
@@ -50,5 +51,5 @@ const EFFECTS = [
 ];
 
 
-export {MINDESCRIPTIONLENGT,MAXDESCRIPTIONLENGT};
-export {EFFECTS};
+export {DESCRIPTION_MIN_LENGT,DESCRIPTION_MAX_LENGT};
+export {imageEffects};
